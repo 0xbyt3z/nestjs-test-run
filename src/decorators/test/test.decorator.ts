@@ -1,3 +1,9 @@
-import { SetMetadata } from '@nestjs/common';
+import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
-export const Test = (...args: string[]) => SetMetadata('test', args);
+export const Test = createParamDecorator(
+  (data: unknown, ctx: ExecutionContext) => {
+    const request = ctx.switchToHttp().getRequest();
+    console.log(request);
+    return request;
+  },
+);

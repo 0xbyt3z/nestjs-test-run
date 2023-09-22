@@ -7,9 +7,13 @@ import {
   Post,
   Redirect,
   Req,
+  UseInterceptors,
 } from '@nestjs/common';
 import { Request } from 'express';
+import { LoggingInterceptor } from './interceptors/loggin/loggin.interceptor';
+import { Test } from './decorators/test/test.decorator';
 
+@UseInterceptors(LoggingInterceptor)
 @Controller()
 export class AppController {
   //simple get route
@@ -70,5 +74,11 @@ export class AppController {
   @Get(':id1/:id2')
   dynamic3(@Param() params: { id1: any; id2: any }): object {
     return params;
+  }
+
+  //custom decorators
+  @Get('decorators')
+  findOne(@Test() req: string) {
+    console.log(`helll ${req}`);
   }
 }

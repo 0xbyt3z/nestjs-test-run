@@ -5,9 +5,15 @@ import { FileService } from './services/file.service';
 import { LoggerMiddleware } from './middleware/logger/logger.middleware';
 import { ExceptionController } from './controllers/exception/exception.controller';
 import { FileController } from './controllers/file/file.controller';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 @Module({
-  imports: [],
+  imports: [
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+    }),
+  ],
   controllers: [AppController, ExceptionController, FileController],
   providers: [AppService, FileService],
 })
