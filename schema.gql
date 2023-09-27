@@ -2,15 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Post {
-  id: Int!
-  title: String!
-  votes: Int
-}
-
 type Query {
   test: String!
-  authors: String!
-  this: String!
-  that: String!
 }
