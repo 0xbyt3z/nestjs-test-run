@@ -2,6 +2,32 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  id: Int!
+  email: String
+  name: String
+  posts: [Post!]!
+}
+
+type Post {
+  id: Int!
+  authorId: Int!
+  title: String
+  content: String
+  published: Boolean
+  author: [User!]!
+}
+
 type Query {
-  test: String!
+  user(id: GetUserInput!): User!
+  post(id: Float!): Post!
+  allPosts: [Post!]!
+}
+
+input GetUserInput {
+  id: Float!
+}
+
+type Mutation {
+  publishPost(id: Float!): Post!
 }

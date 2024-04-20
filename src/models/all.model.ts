@@ -1,15 +1,15 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class Author {
+export class User {
   @Field((type) => Int)
   id: number;
 
   @Field({ nullable: true })
-  firstName?: string;
+  email?: string;
 
   @Field({ nullable: true })
-  lastName?: string;
+  name?: string;
 
   @Field((type) => [Post])
   posts: Post[];
@@ -20,12 +20,18 @@ export class Post {
   @Field((type) => Int)
   id: number;
 
-  @Field({ nullable: true })
-  firstName?: string;
+  @Field((type) => Int)
+  authorId: number;
 
   @Field({ nullable: true })
-  lastName?: string;
+  title?: string;
 
-  @Field((type) => [Post])
-  posts: Post[];
+  @Field({ nullable: true })
+  content?: string;
+
+  @Field({ nullable: true })
+  published?: boolean;
+
+  @Field((type) => [User])
+  author: User[];
 }

@@ -11,36 +11,17 @@ datasource db {
 }
 
 model User {
-  id            String       @id @default(cuid())
-  name          String
-  age           Int
-  followedUser  Friends[]    @relation("Followed_User")
-  followingUser Friends[]    @relation("Following_User")
-  Posts         Posts[]
-  PostsLikes    PostsLikes[]
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  posts Post[]
 }
 
-model Friends {
-  id       String @id @default(cuid())
-  uId      String
-  user     User?  @relation("Followed_User", fields: [uId], references: [id])
-  fId      String
-  follower User?  @relation("Following_User", fields: [fId], references: [id])
-}
-
-model Posts {
-  id         String       @id @default(cuid())
-  post       String
-  uId        String
-  user       User         @relation(fields: [uId], references: [id])
-  likes      Int //likes count
-  PostsLikes PostsLikes[]
-}
-
-model PostsLikes {
-  id        String @id @default(cuid())
-  pId       String
-  post      Posts  @relation(fields: [pId], references: [id])
-  likedBy   String
-  likedUSer User   @relation(fields: [likedBy], references: [id])
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean? @default(false)
+  author    User?    @relation(fields: [authorId], references: [id])
+  authorId  Int?
 }

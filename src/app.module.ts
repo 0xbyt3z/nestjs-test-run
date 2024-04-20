@@ -9,6 +9,9 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AppResolver } from './resolvers/app/app.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserService } from './services/user.service';
+import { PostService } from './services/post.service';
+import { PrismaService } from './services/prisma.service';
 
 @Module({
   imports: [
@@ -19,7 +22,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
   ],
   controllers: [AppController, ExceptionController, FileController],
-  providers: [AppService, FileService, AppResolver],
+  providers: [
+    AppService,
+    FileService,
+    AppResolver,
+    UserService,
+    PostService,
+    PrismaService,
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

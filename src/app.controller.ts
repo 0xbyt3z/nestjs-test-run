@@ -12,11 +12,13 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { LoggingInterceptor } from './interceptors/loggin/loggin.interceptor';
+import { PrismaService } from './services/prisma.service';
 // import { Test } from './decorators/test/test.decorator';
 
 @UseInterceptors(LoggingInterceptor)
 @Controller('')
 export class AppController {
+  constructor(private prismaService: PrismaService) {}
   //simple get route
   @Get('')
   getRoute(): string {
@@ -72,5 +74,10 @@ export class AppController {
   @Get(':id1/:id2')
   dynamic3(@Param() params: { id1: any; id2: any }): object {
     return params;
+  }
+
+  @Get('data')
+  dataRoute1() {
+    return this.prismaService.post.findMany();
   }
 }
